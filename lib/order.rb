@@ -8,7 +8,12 @@ class Order
   end
 
   def select_items(item, quantity)
-    basket[item.to_sym] = quantity
+    if !basket.has_key?(item.to_sym)
+       basket[item.to_sym] = quantity 
+    else  
+      basket[item.to_sym] += quantity
+    end
   end
 
 end
+
