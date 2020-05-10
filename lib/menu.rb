@@ -10,5 +10,4 @@ class Menu
     end
        menu.join(', ')
   end
-
 end
