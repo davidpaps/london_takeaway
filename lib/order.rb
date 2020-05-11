@@ -11,10 +11,10 @@ class Order
     if menu.items.has_key?(item.to_sym)
       if !basket.has_key?(item.to_sym)
         basket[item.to_sym] = quantity 
-        # calculate_total
-        return "#{quantity} x #{item} added!"
+        return "#{quantity} x #{item.capitalize} Added, Total = £#{calculate_total}"
       else  
         basket[item.to_sym] += quantity
+        return "#{basket[item.to_sym]} x #{item.capitalize} Added, Total = £#{calculate_total}"
       end
     else
       raise "No #{item.capitalize} Avaliable!"

@@ -6,6 +6,13 @@ describe Order do
   let(:menu){double :menu, :items => items}
   let(:subject){described_class.new(menu)}
 
+  before(:each) do
+    allow(menu).to receive(:show_price).with(:kebab).and_return(9)
+    allow(menu).to receive(:show_price).with(:pizza).and_return(10)
+    allow(menu).to receive(:show_price).with(:curry).and_return(11)
+  end
+
+
   describe '#select_items' do
    it "selects items avaliable from the menu with 1 quantity as a default" do
       subject.select_items("kebab")
@@ -26,18 +33,20 @@ describe Order do
     it "throws an error if the item is not avaliable" do
       expect {subject.select_items("chips")}.to raise_error "No Chips Avaliable!"
     end
+
+    it "returns a message with the most recent item and quantity, and the total of the basket" do
+      subject.select_items("kebab")
+      subject.select_items("pizza")
+      subject.select_items("kebab")
+      expect(subject.select_items("curry")).to eq("1 x Curry Added, Total = £39")
+    end
   end
   
   describe "calculate total" do
     it "calculate the price of the basket" do
-      allow(menu).to receive(:show_price).with(:kebab).and_return(9)
-      allow(menu).to receive(:show_price).with(:pizza).and_return(10)
       subject.select_items("kebab")
       subject.select_items("pizza")
-
       expect(subject.calculate_total).to eq(19)
-      
-      
     end
   end
 
