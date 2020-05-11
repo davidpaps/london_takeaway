@@ -5,8 +5,7 @@ require 'order'
 describe Order do
   let(:items) { { kebab: 9, pizza: 10, curry: 11 } }
   let(:menu) { double :menu, items: items }
-  let(:message) { double :message}
-
+  let(:message) { double :message }
 
   let(:subject) { described_class.new(menu, message) }
 
@@ -48,16 +47,14 @@ describe Order do
   end
 
   describe '#complete_order' do
-    it "sends a tet confirmation" do
+    it 'sends a tet confirmation' do
       expect(message).to receive(:send)
       subject.complete_order
     end
 
-    it "finalises the order and returns the contents of the basket" do
+    it 'finalises the order and returns the contents of the basket' do
       expect(message).to receive(:send)
-      expect(subject.complete_order).to eq('1 x Kebab, 1 x Pizza, 1 x Curry, Total = £30')
+      expect(subject.complete_order).to eq('Order = 1 x Kebab, 1 x Pizza, 1 x Curry, Total = £30')
     end
   end
-
-
 end

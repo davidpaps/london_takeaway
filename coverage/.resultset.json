@@ -51,10 +51,11 @@
       },
       "/Users/DavidPapamichael/Coding/makers/week_13+/london_takeaway/spec/message_spec.rb": {
         "lines": [
-          1,
+          null,
           null,
           1,
           null,
+          1,
           2,
           2,
           2,
@@ -70,12 +71,13 @@
       },
       "/Users/DavidPapamichael/Coding/makers/week_13+/london_takeaway/lib/Message.rb": {
         "lines": [
+          null,
+          null,
           1,
           1,
           1,
           null,
           1,
-          null,
           1,
           1,
           1,
@@ -95,7 +97,6 @@
           null,
           1,
           1,
-          null,
           null,
           null
         ]
@@ -111,7 +112,6 @@
           8,
           8,
           null,
-          null,
           8,
           null,
           1,
@@ -125,7 +125,6 @@
           null,
           1,
           1,
-          null,
           1,
           1,
           null,
@@ -161,8 +160,6 @@
           1,
           1,
           1,
-          null,
-          null,
           null,
           null,
           null
@@ -219,11 +216,10 @@
           1,
           25,
           null,
-          null,
           null
         ]
       }
     },
-    "timestamp": 1589199877
+    "timestamp": 1589200362
   }
 }

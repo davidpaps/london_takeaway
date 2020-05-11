@@ -35,7 +35,7 @@ class Order
       "#{quantity} x #{item.capitalize}"
     end
     message.send
-    order_total.join(", ") + ", Total = £#{calculate_total}"
+    'Order = ' + order_total.join(', ') + ", Total = £#{calculate_total}"
   end
 
   private
@@ -47,5 +47,4 @@ class Order
   def exist_in_basket?(item)
     basket.key?(item.to_sym)
   end
-
 end
