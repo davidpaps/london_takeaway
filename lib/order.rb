@@ -11,6 +11,8 @@ class Order
     if menu.items.has_key?(item.to_sym)
       if !basket.has_key?(item.to_sym)
         basket[item.to_sym] = quantity 
+        # calculate_total
+        return "#{quantity} x #{item} added!"
       else  
         basket[item.to_sym] += quantity
       end
@@ -18,6 +20,13 @@ class Order
       raise "No #{item.capitalize} Avaliable!"
     end
   end
+
+  def calculate_total
+    total = basket.map do |item, quantity| 
+      menu.show_price(item) * quantity
+  end
+    return total.reduce(:+)
+end
 
 end
 

@@ -7,15 +7,7 @@ describe Order do
   let(:subject){described_class.new(menu)}
 
   describe '#select_items' do
-    it "selects items avaliable from the menu" do
-     3. times {subject.select_items("kebab", 1)}
-     2.times {subject.select_items("pizza", 1)}
-     subject.select_items("curry", 1)
-     expect(subject.basket.length).to eq(3)
-     expect(subject.basket).to eq(kebab: 3, pizza: 2, curry: 1)
-    end
-
-    it "selects items avaliable from the menu with 1 quantity as a default" do
+   it "selects items avaliable from the menu with 1 quantity as a default" do
       subject.select_items("kebab")
       subject.select_items("pizza")
       subject.select_items("curry")
@@ -23,9 +15,30 @@ describe Order do
       expect(subject.basket).to eq(kebab: 1, pizza: 1, curry: 1)
      end
 
+     it "adds the quantity if multiple same items are selected" do
+      3. times {subject.select_items("kebab", 1)}
+      2.times {subject.select_items("pizza", 1)}
+      subject.select_items("curry", 1)
+      expect(subject.basket.length).to eq(3)
+      expect(subject.basket).to eq(kebab: 3, pizza: 2, curry: 1)
+     end
+
     it "throws an error if the item is not avaliable" do
       expect {subject.select_items("chips")}.to raise_error "No Chips Avaliable!"
     end
   end
   
+  describe "calculate total" do
+    it "calculate the price of the basket" do
+      allow(menu).to receive(:show_price).with(:kebab).and_return(9)
+      allow(menu).to receive(:show_price).with(:pizza).and_return(10)
+      subject.select_items("kebab")
+      subject.select_items("pizza")
+
+      expect(subject.calculate_total).to eq(19)
+      
+      
+    end
+  end
+
 end

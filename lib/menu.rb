@@ -12,4 +12,9 @@ class Menu
     end
        menu.join(', ')
   end
+
+  def show_price(item)
+    items[item.to_sym]
+  end
+
 end
