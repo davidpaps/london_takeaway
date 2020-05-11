@@ -23,6 +23,9 @@ describe Order do
       expect(subject.basket).to eq(kebab: 1, pizza: 1, curry: 1)
      end
 
- 
+    it "throws an error if the item is not avaliable" do
+      expect {subject.select_items("chips")}.to raise_error "No Chips Avaliable!"
+    end
   end
+  
 end
