@@ -8,8 +8,8 @@ class Order
   end
 
   def select_items(item, quantity = 1)
-    if menu.items.has_key?(item.to_sym)
-      if !basket.has_key?(item.to_sym)
+    if exist_in_menu?(item)
+      if !exist_in_basket?(item)
         basket[item.to_sym] = quantity 
         return "#{quantity} x #{item.capitalize} Added, Total = £#{calculate_total}"
       else  
@@ -24,9 +24,19 @@ class Order
   def calculate_total
     total = basket.map do |item, quantity| 
       menu.show_price(item) * quantity
-  end
+     end
     return total.reduce(:+)
-end
+  end
+
+  private
+
+  def exist_in_menu?(item)
+    menu.items.has_key?(item.to_sym)
+  end
+
+  def exist_in_basket?(item)
+    basket.has_key?(item.to_sym)
+  end
 
 end
 
