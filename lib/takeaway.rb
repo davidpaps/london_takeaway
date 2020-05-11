@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 require_relative 'order'
 
 class Takeaway
-
-attr_reader :order
+  attr_reader :order
 
   def initialize(order = Order.new)
     @order = order
@@ -19,5 +20,4 @@ attr_reader :order
   def finalise_order
     order.complete_order
   end
-
 end

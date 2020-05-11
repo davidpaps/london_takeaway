@@ -22,9 +22,6 @@ class Menu
   private
 
   def set_items
-    if @items == {}
-      @items = { pizza: 10, kebab: 9, curry: 11}
-    end
-
+    @items = { pizza: 10, kebab: 9, curry: 11 } if @items == {}
   end
 end
