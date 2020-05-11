@@ -10,14 +10,19 @@ class Message
     @client = Twilio::REST::Client.new account_sid, auth_token
     @from = ENV['FROM']
     @to = ENV['TO']
+    @message = "Thank you, your order has been placed and will arrive at #{delivery_time}"
   end
 
-  def send(message)
+  def send
     @client.messages.create(
-    body: message,
+    body: @message,
     from: @from,  
     to: @to
     )
+  end
+
+  def delivery_time
+    (Time.now + (60 * 60)).strftime("%k:%M")
   end
 
 end

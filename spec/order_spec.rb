@@ -5,7 +5,10 @@ require 'order'
 describe Order do
   let(:items) { { kebab: 9, pizza: 10, curry: 11 } }
   let(:menu) { double :menu, items: items }
-  let(:subject) { described_class.new(menu) }
+  let(:message) { double :message}
+
+
+  let(:subject) { described_class.new(menu, message) }
 
   before(:each) do
     allow(menu).to receive(:show_price).with(:kebab).and_return(9)
@@ -56,6 +59,16 @@ describe Order do
       subject.select_items('pizza')
       subject.select_items('curry')
       subject.select_items('pizza')
+      expect(message).to receive(:send)
+      subject.complete_order
+    end
+
+    it "finalises the order and returns the contents of the basket" do
+      subject.select_items('kebab')
+      subject.select_items('pizza')
+      subject.select_items('curry')
+      subject.select_items('pizza')
+      expect(message).to receive(:send)
       expect(subject.complete_order).to eq('1 x Kebab, 2 x Pizza, 1 x Curry, Total = £40')
     end
   end

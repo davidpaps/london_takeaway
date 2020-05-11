@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
 class Order
-  attr_reader :basket, :menu
+  attr_reader :basket, :menu, :message
 
-  def initialize(menu = Menu.new)
+  def initialize(menu = Menu.new, message = Message.new)
     @menu = menu
+    @message = message
     @basket = {}
   end
 
@@ -33,6 +34,7 @@ class Order
     order_total = basket.map do |item, quantity|
       "#{quantity} x #{item.capitalize}"
     end
+    message.send
     order_total.join(", ") + ", Total = £#{calculate_total}"
   end
 
@@ -44,10 +46,6 @@ class Order
 
   def exist_in_basket?(item)
     basket.key?(item.to_sym)
-  end
-
-  def delivery_time
-    (Time.now + (60 * 60)).strftime("%k:%M")
   end
 
 end
