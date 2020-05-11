@@ -1,4 +1,6 @@
 # frozen_string_literal: true
+require_relative 'menu'
+require_relative 'message'
 
 class Order
   attr_reader :basket, :menu, :message

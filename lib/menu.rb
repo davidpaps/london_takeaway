@@ -10,7 +10,7 @@ class Menu
 
   def show_menu
     menu = items.map do |item, price|
-      "#{item} = #{price}"
+      "#{item} = £#{price}"
     end
     menu.join(', ')
   end
@@ -22,7 +22,7 @@ class Menu
   private
 
   def set_items
-    if @items =={}
+    if @items == {}
       @items = { pizza: 10, kebab: 9, curry: 11}
     end
 
