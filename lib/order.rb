@@ -11,10 +11,10 @@ class Order
     if exist_in_menu?(item)
       if !exist_in_basket?(item)
         basket[item.to_sym] = quantity 
-        return "#{quantity} x #{item.capitalize} Added, Total = £#{calculate_total}"
+        "#{quantity} x #{item.capitalize} Added, Total = £#{calculate_total}"
       else  
         basket[item.to_sym] += quantity
-        return "#{basket[item.to_sym]} x #{item.capitalize} Added, Total = £#{calculate_total}"
+        "#{basket[item.to_sym]} x #{item.capitalize} Added, Total = £#{calculate_total}"
       end
     else
       raise "No #{item.capitalize} Avaliable!"
@@ -25,7 +25,7 @@ class Order
     total = basket.map do |item, quantity| 
       menu.show_price(item) * quantity
      end
-    return total.reduce(:+)
+    total.reduce(:+)
   end
 
   private
