@@ -3,8 +3,9 @@
 class Menu
   attr_reader :items
 
-  def initialize(items)
+  def initialize(items = {})
     @items = items
+    set_items
   end
 
   def show_menu
@@ -16,5 +17,14 @@ class Menu
 
   def show_price(item)
     items[item.to_sym]
+  end
+
+  private
+
+  def set_items
+    if @items =={}
+      @items = { pizza: 10, kebab: 9, curry: 11}
+    end
+
   end
 end

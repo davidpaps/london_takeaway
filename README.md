@@ -2,7 +2,7 @@
 
 ---
 
-A simple Object Orientated app, simulating the Santender Cycles around London - functions via the command line. Test driven in Ruby with the RSpec library, this showcases good coding prncipals: Encapsulation, DRY, SRP, TDD. Built on the a set of user stories. Once the user story requirements were met, modules were used as mixins to DRY out the code further, as many classes shared duplicate code. This showcases good Object Composition. The 'Shared Examples' feature of RSpec were also used to feature test the use of modules.
+A simple Object Orientated app, simulating a classic London Takeaway Resturant - functions via the command line. Test driven in Ruby with the RSpec library, this showcases good coding prncipals: Encapsulation, DRY, SRP, TDD. Built on the a set of user stories. The `Twilio` gem and `dotenv` gem were used. The Twilio gem was used to send a text message to a users mobile phone once an order has been placed. The dotenv gem was used to hide the API key, and avoid the credentials being published on the internet.
 
 ## User Stories
 
