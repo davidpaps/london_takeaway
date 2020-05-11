@@ -42,11 +42,23 @@ describe Order do
     end
   end
 
-  describe 'calculate total' do
+  describe '#calculate_total' do
     it 'calculate the price of the basket' do
       subject.select_items('kebab')
       subject.select_items('pizza')
       expect(subject.calculate_total).to eq(19)
     end
   end
+
+  describe '#complete_order' do
+    it "finalises the order and returns the contents of the basket" do
+      subject.select_items('kebab')
+      subject.select_items('pizza')
+      subject.select_items('curry')
+      subject.select_items('pizza')
+      expect(subject.complete_order).to eq('1 x Kebab, 2 x Pizza, 1 x Curry, Total = £40')
+    end
+  end
+
+
 end

@@ -29,6 +29,13 @@ class Order
     total.reduce(:+)
   end
 
+  def complete_order
+    order_total = basket.map do |item, quantity|
+      "#{quantity} x #{item.capitalize}"
+    end
+    order_total.join(", ") + ", Total = £#{calculate_total}"
+  end
+
   private
 
   def exist_in_menu?(item)
@@ -38,4 +45,9 @@ class Order
   def exist_in_basket?(item)
     basket.key?(item.to_sym)
   end
+
+  def delivery_time
+    (Time.now + (60 * 60)).strftime("%k:%M")
+  end
+
 end
