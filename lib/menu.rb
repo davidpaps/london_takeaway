@@ -7,7 +7,7 @@ class Menu
   end
 
   def show_menu
-    menu = @items.map do |item, price|
+    menu = items.map do |item, price|
        "#{item} = #{price}"
     end
        menu.join(', ')
