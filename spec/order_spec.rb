@@ -14,21 +14,20 @@ describe Order do
     allow(menu).to receive(:show_price).with(:kebab).and_return(9)
     allow(menu).to receive(:show_price).with(:pizza).and_return(10)
     allow(menu).to receive(:show_price).with(:curry).and_return(11)
+    subject.select_items('kebab')
+    subject.select_items('pizza')
+    subject.select_items('curry')
   end
 
   describe '#select_items' do
     it 'selects items avaliable from the menu with 1 quantity as a default' do
-      subject.select_items('kebab')
-      subject.select_items('pizza')
-      subject.select_items('curry')
       expect(subject.basket.length).to eq(3)
       expect(subject.basket).to eq(kebab: 1, pizza: 1, curry: 1)
     end
 
     it 'adds the quantity if multiple same items are selected' do
-      3. times { subject.select_items('kebab', 1) }
-      2.times { subject.select_items('pizza', 1) }
-      subject.select_items('curry', 1)
+      2. times { subject.select_items('kebab', 1) }
+      subject.select_items('pizza', 1)
       expect(subject.basket.length).to eq(3)
       expect(subject.basket).to eq(kebab: 3, pizza: 2, curry: 1)
     end
@@ -38,38 +37,25 @@ describe Order do
     end
 
     it 'returns a message with the most recent item and quantity, and the total of the basket' do
-      subject.select_items('kebab')
-      subject.select_items('pizza')
-      subject.select_items('kebab')
-      expect(subject.select_items('curry')).to eq('1 x Curry Added, Total = £39')
+      expect(subject.select_items('curry')).to eq('2 x Curry Added, Total = £41')
     end
   end
 
   describe '#calculate_total' do
     it 'calculate the price of the basket' do
-      subject.select_items('kebab')
-      subject.select_items('pizza')
-      expect(subject.calculate_total).to eq(19)
+      expect(subject.calculate_total).to eq(30)
     end
   end
 
   describe '#complete_order' do
-    it "finalises the order and returns the contents of the basket" do
-      subject.select_items('kebab')
-      subject.select_items('pizza')
-      subject.select_items('curry')
-      subject.select_items('pizza')
+    it "sends a tet confirmation" do
       expect(message).to receive(:send)
       subject.complete_order
     end
 
     it "finalises the order and returns the contents of the basket" do
-      subject.select_items('kebab')
-      subject.select_items('pizza')
-      subject.select_items('curry')
-      subject.select_items('pizza')
       expect(message).to receive(:send)
-      expect(subject.complete_order).to eq('1 x Kebab, 2 x Pizza, 1 x Curry, Total = £40')
+      expect(subject.complete_order).to eq('1 x Kebab, 1 x Pizza, 1 x Curry, Total = £30')
     end
   end
 
